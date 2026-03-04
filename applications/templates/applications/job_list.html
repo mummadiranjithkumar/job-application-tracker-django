@@ -1,0 +1,35 @@
+{% extends 'applications/base.html' %}
+
+{% block content %}
+<h1>Job Applications</h1>
+<a href="{% url 'job_create' %}" class="btn btn-primary mb-3">Add Job Application</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.company }}</td>
+                <td>{{ job.role }}</td>
+                <td>{{ job.location }}</td>
+                <td>{{ job.status }}</td>
+                <td>{{ job.application_date }}</td>
+                <td>
+                    <a href="{% url 'job_update' job.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'job_delete' job.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6">No applications found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
